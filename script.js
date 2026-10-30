@@ -28,7 +28,7 @@ const works = {
 const pad = n => String(n).padStart(2, '0');
 const card = (dir, [file, no, medium, w, h]) => `
   <figure class="frame reveal">
-    <img src="Assets/Images/${dir}/${file}.jpg" alt="${medium}, № ${pad(no)}" width="${w}" height="${h}" loading="lazy">
+    <img src="Assets/Web/${dir}/${file}.jpg" alt="${medium}, № ${pad(no)}" width="${w}" height="${h}" loading="lazy">
     <figcaption>№ ${pad(no)} · ${medium}</figcaption>
   </figure>`;
 
@@ -50,14 +50,37 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 const box = document.querySelector('.lightbox');
 const boxImg = box.querySelector('img');
 const boxCap = box.querySelector('figcaption');
-let lastFocus;
+const prevBtn = box.querySelector('.lightbox-prev');
+const nextBtn = box.querySelector('.lightbox-next');
+const behind = document.querySelectorAll('body > header, main, body > footer');
+const viewable = 'main .frame, main .photo';
+let group = [], index = 0, lastFocus;
 
-function openBox(src, alt, caption) {
-  lastFocus = document.activeElement;
-  boxImg.src = src;
-  boxImg.alt = alt;
-  boxCap.textContent = caption;
-  boxCap.hidden = !caption;
+// Every photo that opens the viewer can also be reached with Tab and opened with Enter or Space
+document.querySelectorAll(viewable).forEach(fig => {
+  fig.tabIndex = 0;
+  fig.setAttribute('role', 'button');
+  fig.setAttribute('aria-label', `View larger: ${fig.querySelector('img').alt}`);
+});
+
+function show(i) {
+  index = (i + group.length) % group.length;
+  const fig = group[index];
+  const img = fig.querySelector('img');
+  boxImg.src = img.src.replace('/Assets/Web/', '/Assets/Images/'); // full-size original
+  boxImg.alt = img.alt;
+  boxCap.textContent = fig.dataset.caption || fig.querySelector('figcaption')?.textContent || '';
+  boxCap.hidden = !boxCap.textContent;
+}
+
+function openBox(fig) {
+  lastFocus = fig;
+  // Step through the photos of the same gallery or journal; others open on their own
+  const set = fig.closest('[data-gallery], .journal');
+  group = set ? [...set.querySelectorAll('.frame, .photo')] : [fig];
+  prevBtn.hidden = nextBtn.hidden = group.length < 2;
+  show(group.indexOf(fig));
+  behind.forEach(el => { el.inert = true; }); // keeps Tab inside the viewer
   box.hidden = false;
   requestAnimationFrame(() => box.classList.add('open'));
   box.querySelector('.lightbox-close').focus();
@@ -65,19 +88,35 @@ function openBox(src, alt, caption) {
 
 function closeBox() {
   box.classList.remove('open');
+  behind.forEach(el => { el.inert = false; });
   setTimeout(() => { box.hidden = true; }, 350);
   lastFocus?.focus();
 }
 
 document.addEventListener('click', e => {
-  const fig = e.target.closest('.frame, .photo');
-  if (fig && !box.contains(fig)) {
-    const img = fig.querySelector('img');
-    openBox(img.src, img.alt, fig.dataset.caption || fig.querySelector('figcaption')?.textContent || '');
-  } else if (e.target === box || e.target.closest('.lightbox-close')) {
-    closeBox();
-  }
+  const fig = e.target.closest(viewable);
+  if (fig) openBox(fig);
+  else if (e.target.closest('.lightbox-prev')) show(index - 1);
+  else if (e.target.closest('.lightbox-next')) show(index + 1);
+  else if (e.target === box || e.target.closest('.lightbox-close')) closeBox();
 });
-document.addEventListener('keydown', e => { if (e.key === 'Escape' && !box.hidden) closeBox(); });
+
+document.addEventListener('keydown', e => {
+  if (box.hidden) {
+    const fig = e.target.closest?.(viewable);
+    if (fig && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); openBox(fig); }
+  } else if (e.key === 'Escape') closeBox();
+  else if (e.key === 'ArrowLeft' && group.length > 1) show(index - 1);
+  else if (e.key === 'ArrowRight' && group.length > 1) show(index + 1);
+});
+
+// Swipe left or right on phones
+let touchX = null;
+box.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, { passive: true });
+box.addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - touchX;
+  if (group.length > 1 && Math.abs(dx) > 50) show(dx < 0 ? index + 1 : index - 1);
+  touchX = null;
+});
 // Firefox ignores -webkit-user-drag, so stop images being dragged out here too
 document.addEventListener('dragstart', e => { if (e.target.tagName === 'IMG') e.preventDefault(); });
