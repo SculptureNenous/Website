@@ -6,6 +6,34 @@ const paintingSizes = [
   [1448, 2048], [1440, 1800], [1700, 2048], [1440, 1086], [860, 960], [1848, 2048], [1440, 1800],
   [1540, 2048], [1628, 2048], [1638, 2048], [2048, 1494], [2048, 1536], [1284, 1737], [1280, 1804],
 ];
+// Titles and details from Nenous's own Facebook posts, keyed by painting file number.
+// Paintings missing here keep the plain "Painting" caption until their titles are known.
+const paintingDetails = {
+  1: { title: 'New Birth', size: '120.9 × 90.4 cm' },
+  3: { title: "Dante's Inferno", year: 2020 },
+  4: { title: 'Colorful Moons', size: '100 × 80 cm' },
+  5: { title: 'Cultural Heritage', size: '100 × 90 cm' },
+  6: { title: 'Behind the Curtain', medium: 'Oil on canvas' },
+  7: { medium: 'Oil', year: 2022 },
+  8: { title: 'Remnants of a Homeland', medium: 'Oil on canvas', size: '180 × 150 cm' },
+  9: { title: 'Assyrian Moon', size: '100 × 80 cm' },
+  10: { title: 'Will of the People', medium: 'Acrylic', size: '100 × 120 cm', year: 2020 },
+  11: { title: 'Bakhdida Wedding', year: 2023 },
+  12: { title: 'Tree of Life' },
+  15: { title: 'Migratory Bird', size: '70 × 50 cm' },
+  16: { title: 'The Compass', medium: 'Oil', year: 2024 },
+  17: { title: 'When the Soul Embraces the Sun', size: '80 × 60 cm' },
+  18: { year: 2022 },
+  19: { title: 'War and Hope', medium: 'Oil on canvas', size: '100 × 90 cm', year: 2022 },
+  20: { title: 'Captives', size: '100 × 90 cm' },
+  21: { title: 'Vegetable Seller', medium: 'Oil on canvas', size: '100 × 80 cm', year: 2022 },
+  23: { title: 'Take Root', size: '100 × 80 cm' },
+  24: { title: 'Waiting', size: '100 × 80 cm' },
+  25: { title: 'Old House', size: '100 × 80 cm' },
+  26: { medium: 'Oil', year: 2022 },
+  27: { title: 'Candle', size: '100 × 80 cm' },
+};
+
 const works = {
   sculpture: {
     dir: 'Statues',
@@ -21,15 +49,15 @@ const works = {
   painting: {
     dir: 'Paintings',
     // painting-1..28 are catalogued №09..№22 and №29..№42
-    items: paintingSizes.map(([w, h], i) => [`painting-${i + 1}`, i < 14 ? i + 9 : i + 15, 'Painting', w, h]),
+    items: paintingSizes.map(([w, h], i) => [`painting-${i + 1}`, i < 14 ? i + 9 : i + 15, 'Painting', w, h, paintingDetails[i + 1]]),
   },
 };
 
 const pad = n => String(n).padStart(2, '0');
-const card = (dir, [file, no, medium, w, h]) => `
+const card = (dir, [file, no, medium, w, h, { title, size, year, ...d } = {}]) => `
   <figure class="frame reveal">
-    <img src="Assets/Web/${dir}/${file}.jpg" alt="${medium}, № ${pad(no)}" width="${w}" height="${h}" loading="lazy">
-    <figcaption>№ ${pad(no)} · ${medium}</figcaption>
+    <img src="Assets/Web/${dir}/${file}.jpg" alt="${title || medium}, № ${pad(no)}" width="${w}" height="${h}" loading="lazy">
+    <figcaption>${title ? `<span class="work-title">${title}</span>` : ''}№ ${pad(no)} · ${[d.medium || medium, size, year].filter(Boolean).join(' · ')}</figcaption>
   </figure>`;
 
 // Two fixed columns (first half left, as in the original) instead of CSS columns,
@@ -69,7 +97,7 @@ function show(i) {
   const img = fig.querySelector('img');
   boxImg.src = img.src.replace('/Assets/Web/', '/Assets/Images/'); // full-size original
   boxImg.alt = img.alt;
-  boxCap.textContent = fig.dataset.caption || fig.querySelector('figcaption')?.textContent || '';
+  boxCap.innerHTML = fig.dataset.caption || fig.querySelector('figcaption')?.innerHTML || ''; // keeps the title line; both are this site's own markup
   boxCap.hidden = !boxCap.textContent;
 }
 
