@@ -90,7 +90,7 @@ a { color: inherit; text-decoration: none; }
   box-shadow: var(--shadow);
   cursor: zoom-in;
 }
-.frame img { width: 100%; transition: transform 0.6s ease; }
+.frame img { width: 100%; height: auto; transition: transform 0.6s ease; }
 .frame:not(.lightbox-frame):hover img { transform: scale(1.02); }
 .frame figcaption {
   font: 500 10.8px/1 var(--sans);
@@ -141,8 +141,9 @@ a { color: inherit; text-decoration: none; }
 .gallery-section { padding-bottom: 108px; }
 .section-head { margin-bottom: 52.8px; }
 .section-head h2 { font: 400 40.8px var(--serif); text-transform: uppercase; margin: 26.4px 0 0; }
-.gallery { columns: 2; column-gap: 24px; }
-.gallery .frame { break-inside: avoid; margin-bottom: 26.4px; }
+.gallery { display: flex; align-items: flex-start; gap: 24px; }
+.gallery-col { flex: 1; min-width: 0; }
+.gallery .frame { margin-bottom: 26.4px; }
 
 /* Reconstruction ledger */
 .ledger {
@@ -238,5 +239,6 @@ a { color: inherit; text-decoration: none; }
   .journal { grid-template-columns: 1fr; }
 }
 @media (max-width: 520px) {
-  .gallery { columns: 1; }
+  .gallery { flex-direction: column; gap: 0; }
+  .gallery-col { width: 100%; }
 }
