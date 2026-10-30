@@ -211,6 +211,8 @@ a { color: inherit; text-decoration: none; }
   margin: 0; font: 500 10.8px var(--sans); letter-spacing: 0.25em; text-transform: uppercase; color: #7d7265;
 }
 .site-footer a { transition: color 0.25s; }
+.footer-links { display: flex; gap: 28.8px; }
+.footer-links a:last-child { margin-right: -0.25em; } /* cancel trailing letter-spacing at the right edge */
 .site-footer a:hover { color: var(--gold); }
 
 /* Lightbox */
