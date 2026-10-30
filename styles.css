@@ -60,7 +60,7 @@ a { color: inherit; text-decoration: none; }
   transition: color 0.25s;
 }
 .nav-links a:hover { color: var(--terracotta); }
-.nav-links .nav-mark { color: var(--gold); font-size: 13.2px; letter-spacing: 0; }
+.nav-links a:last-child { margin-right: -0.2em; } /* cancel trailing letter-spacing so the text meets the right edge */
 
 /* Hero */
 .hero {
