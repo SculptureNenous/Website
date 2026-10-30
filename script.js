@@ -2,7 +2,7 @@
 // Width/height reserve each image's space before it loads, so nothing shifts while scrolling.
 const paintingSizes = [
   [1516, 2048], [1179, 912], [746, 1280], [1524, 2048], [1842, 2048], [1284, 1947], [1522, 2048],
-  [1543, 1831], [1486, 2048], [1718, 2048], [2048, 1680], [1532, 2048], [500, 360], [1486, 2048],
+  [1543, 1831], [1486, 2048], [1718, 2048], [2048, 1680], [1532, 2048], null /* painting-13 (№21) removed */, [1486, 2048],
   [1448, 2048], [1440, 1800], [1700, 2048], [1440, 1086], [860, 960], [1848, 2048], [1440, 1800],
   [1540, 2048], [1628, 2048], [1638, 2048], [2048, 1494], [2048, 1536], [1284, 1737], [1280, 1804],
 ];
@@ -10,6 +10,7 @@ const paintingSizes = [
 // Paintings missing here keep the plain "Painting" caption until their titles are known.
 const paintingDetails = {
   1: { title: 'New Birth', size: '120.9 × 90.4 cm' },
+  2: { title: 'Oil Painting', size: '50 × 60 cm', year: 2022 },
   3: { title: "Dante's Inferno", year: 2020 },
   4: { title: 'Colorful Moons', size: '100 × 80 cm' },
   5: { title: 'Cultural Heritage', size: '100 × 90 cm' },
@@ -20,6 +21,7 @@ const paintingDetails = {
   10: { title: 'Will of the People', medium: 'Acrylic', size: '100 × 120 cm', year: 2020 },
   11: { title: 'Bakhdida Wedding', year: 2023 },
   12: { title: 'Tree of Life' },
+  14: { title: 'Oil Painting', size: '100 × 80 cm', year: 2022 },
   15: { title: 'Migratory Bird', size: '70 × 50 cm' },
   16: { title: 'The Compass', medium: 'Oil', year: 2024 },
   17: { title: 'When the Soul Embraces the Sun', size: '80 × 60 cm' },
@@ -27,11 +29,13 @@ const paintingDetails = {
   19: { title: 'War and Hope', medium: 'Oil on canvas', size: '100 × 90 cm', year: 2022 },
   20: { title: 'Captives', size: '100 × 90 cm' },
   21: { title: 'Vegetable Seller', medium: 'Oil on canvas', size: '100 × 80 cm', year: 2022 },
+  22: { title: 'The Martyr in the War', size: '90 × 60 cm', year: 2022 },
   23: { title: 'Take Root', size: '100 × 80 cm' },
   24: { title: 'Waiting', size: '100 × 80 cm' },
   25: { title: 'Old House', size: '100 × 80 cm' },
   26: { medium: 'Oil', year: 2022 },
   27: { title: 'Candle', size: '100 × 80 cm' },
+  28: { title: 'The Burial of Hope', size: '100 × 80 cm', year: 2024 },
 };
 
 const works = {
@@ -49,7 +53,7 @@ const works = {
   painting: {
     dir: 'Paintings',
     // painting-1..28 are catalogued №09..№22 and №29..№42
-    items: paintingSizes.map(([w, h], i) => [`painting-${i + 1}`, i < 14 ? i + 9 : i + 15, 'Painting', w, h, paintingDetails[i + 1]]),
+    items: paintingSizes.map((s, i) => s && [`painting-${i + 1}`, i < 14 ? i + 9 : i + 15, 'Painting', ...s, paintingDetails[i + 1]]).filter(Boolean),
   },
 };
 
