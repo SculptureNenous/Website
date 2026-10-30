@@ -63,28 +63,6 @@ document.querySelectorAll(viewable).forEach(fig => {
   fig.setAttribute('aria-label', `View larger: ${fig.querySelector('img').alt}`);
 });
 
-// Galleries and the journal are built as columns, so their code order runs down each column.
-// Read them row by row instead (left, right, next row) while the columns sit side by side.
-function readingOrder(set) {
-  const cols = [...set.querySelectorAll('.gallery-col, .entry')];
-  const items = cols.map(col => [...col.querySelectorAll('.frame, .photo')]);
-  if (cols.length < 2 || cols[0].offsetTop !== cols[1].offsetTop) return items.flat(); // stacked on phones
-  const rows = [];
-  for (let r = 0; r < Math.max(...items.map(c => c.length)); r++) items.forEach(c => c[r] && rows.push(c[r]));
-  return rows;
-}
-
-// Page Tab order, with each gallery and the journal swapped into reading order
-function tabOrder() {
-  const list = [...document.querySelectorAll('a[href], button, [tabindex="0"]')]
-    .filter(el => !el.closest('[inert], [hidden]') && el.getClientRects().length);
-  document.querySelectorAll('[data-gallery], .journal').forEach(set => {
-    const slots = list.flatMap((el, i) => (set.contains(el) ? [i] : []));
-    readingOrder(set).forEach((el, k) => { list[slots[k]] = el; });
-  });
-  return list;
-}
-
 function show(i) {
   index = (i + group.length) % group.length;
   const fig = group[index];
@@ -99,7 +77,7 @@ function openBox(fig) {
   lastFocus = fig;
   // Step through the photos of the same gallery or journal; others open on their own
   const set = fig.closest('[data-gallery], .journal');
-  group = set ? readingOrder(set) : [fig];
+  group = set ? [...set.querySelectorAll('.frame, .photo')] : [fig];
   prevBtn.hidden = nextBtn.hidden = group.length < 2;
   show(group.indexOf(fig));
   behind.forEach(el => { el.inert = true; }); // keeps Tab inside the viewer
@@ -127,12 +105,6 @@ document.addEventListener('keydown', e => {
   if (box.hidden) {
     const fig = e.target.closest?.(viewable);
     if (fig && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); openBox(fig); }
-    if (e.key === 'Tab') {
-      const list = tabOrder();
-      const i = list.indexOf(document.activeElement);
-      const next = i < 0 ? null : list[i + (e.shiftKey ? -1 : 1)];
-      if (next) { e.preventDefault(); next.focus(); } // past either end, let the browser take over
-    }
   } else if (e.key === 'Escape') closeBox();
   else if (e.key === 'ArrowLeft' && group.length > 1) show(index - 1);
   else if (e.key === 'ArrowRight' && group.length > 1) show(index + 1);
