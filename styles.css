@@ -118,11 +118,11 @@ a { color: inherit; text-decoration: none; }
 
 /* Divider */
 .divider { padding: 19.2px 0 0; text-align: center; color: #8b8073; }
-.divider .cuneiform { font-size: 13.2px; letter-spacing: 1.2em; margin: 0 0 9.6px; }
+.divider > .cuneiform { font-size: 16px; letter-spacing: 0.52em; margin: 0 0 9.6px; }
 .divider-line { position: relative; margin: 0 38.4px; height: 1px; background: #b6aa98; }
 .divider-line span {
   position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
-  background: var(--bg); color: var(--terracotta); padding: 0 14.4px; font-size: 13.2px;
+  background: var(--bg); color: var(--terracotta); padding: 0 12px; font-size: 15px;
 }
 
 /* Halls */
@@ -188,7 +188,7 @@ a { color: inherit; text-decoration: none; }
 .commission .eyebrow { color: #9b8f80; }
 .commission h2 { font: 400 clamp(31.2px, 4.4vw, 42px)/1.2 var(--serif); margin: 26.4px 0 21.6px; }
 .commission-syriac { color: var(--gold); text-decoration: underline; text-underline-offset: 4.8px; margin: 0 auto; width: max-content; font-size: 15.6px; }
-.commission-glyphs { color: var(--gold); font-size: 12px; letter-spacing: 0.7em; margin: 31.2px 0 26.4px; }
+.commission-glyphs { color: var(--gold); font-size: 14.4px; letter-spacing: 0.42em; margin: 31.2px 0 26.4px; }
 .actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 15.6px; margin-bottom: 33.6px; }
 .btn {
   border: 1px solid var(--gold);
