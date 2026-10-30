@@ -24,7 +24,9 @@ body {
   font-family: var(--sans);
   -webkit-font-smoothing: antialiased;
 }
-img { display: block; max-width: 100%; }
+img { display: block; max-width: 100%; -webkit-user-drag: none; }
+/* Pictures and their frames never take the blue text-selection highlight */
+img, .frame, .hall, .photo { -webkit-user-select: none; user-select: none; }
 a { color: inherit; text-decoration: none; }
 
 .wrap { width: min(972px, 100% - 32px); margin-inline: auto; }

@@ -79,3 +79,5 @@ document.addEventListener('click', e => {
   }
 });
 document.addEventListener('keydown', e => { if (e.key === 'Escape' && !box.hidden) closeBox(); });
+// Firefox ignores -webkit-user-drag, so stop images being dragged out here too
+document.addEventListener('dragstart', e => { if (e.target.tagName === 'IMG') e.preventDefault(); });
