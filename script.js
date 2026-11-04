@@ -1,75 +1,24 @@
-// Catalogue: [file, catalogue number, medium, width, height]. Numbers follow the original site's ledger.
-// Width/height reserve each image's space before it loads, so nothing shifts while scrolling.
-const paintingSizes = [
-  [1516, 2048], [1179, 912], [746, 1280], [1524, 2048], [1842, 2048], [1284, 1947], [1522, 2048],
-  [1543, 1831], [1486, 2048], [1718, 2048], [2048, 1680], [1532, 2048], null /* painting-13 (№21) removed */, [1486, 2048],
-  [1448, 2048], [1440, 1800], [1700, 2048], [1440, 1086], [860, 960], [1848, 2048], [1440, 1800],
-  [1540, 2048], [1628, 2048], [1638, 2048], [2048, 1494], [2048, 1536], [1284, 1737], [1280, 1804],
-];
-// Titles and details from Nenous's own Facebook posts, keyed by painting file number.
-// Paintings missing here keep the plain "Painting" caption until their titles are known.
-const paintingDetails = {
-  1: { title: 'New Birth', size: '120.9 × 90.4 cm', year: 2022 },
-  2: { title: 'Oil Painting', size: '50 × 60 cm', year: 2022 },
-  3: { title: "Dante's Inferno", size: '120 × 60 cm', year: 2020 },
-  4: { title: 'Colorful Moons', size: '100 × 80 cm', year: 2022 },
-  5: { title: 'Cultural Heritage', size: '100 × 90 cm', year: 2022 },
-  6: { title: 'Behind the Curtain', size: '100 × 80 cm', year: 2023 },
-  7: { title: 'Khigga', size: '100 × 80 cm', year: 2022 },
-  8: { title: 'Remnants of a Homeland', size: '180 × 150 cm', year: 2021 },
-  9: { title: 'Assyrian Moon', size: '100 × 80 cm', year: 2022 },
-  10: { title: 'Will of the People', medium: 'Acrylic', size: '100 × 120 cm', year: 2020 },
-  11: { title: 'Bakhdida Wedding', size: '180 × 150 cm', year: 2023 },
-  12: { title: 'Tree of Life', size: '100 × 80 cm', year: 2022 },
-  14: { title: 'Oil Painting', size: '100 × 80 cm', year: 2022 },
-  15: { title: 'Migratory Bird', size: '70 × 50 cm', year: 2022 },
-  16: { title: 'The Compass', size: '100 × 80 cm', year: 2024 },
-  17: { title: 'When the Soul Embraces the Sun', size: '80 × 60 cm', year: 2022 },
-  18: { title: 'Oil Painting', size: '80 × 100 cm', year: 2022 },
-  19: { title: 'War and Hope', size: '100 × 90 cm', year: 2022 },
-  20: { title: 'Captives', size: '100 × 90 cm', year: 2022 },
-  21: { title: 'Vegetable Seller', size: '100 × 80 cm', year: 2022 },
-  22: { title: 'The Martyr in the War', size: '90 × 60 cm', year: 2022 },
-  23: { title: 'Take Root', size: '100 × 80 cm', year: 2022 },
-  24: { title: 'Waiting', size: '100 × 80 cm', year: 2022 },
-  25: { title: 'Old House', size: '100 × 80 cm', year: 2022 },
-  26: { title: 'Oil Painting', size: '80 × 100 cm', year: 2022 },
-  27: { title: 'Candle', size: '100 × 80 cm', year: 2022 },
-  28: { title: 'The Burial of Hope', size: '100 × 80 cm', year: 2024 },
-};
-
-const works = {
-  sculpture: {
-    dir: 'Statues',
-    items: [
-      ['Statue-2', 5, 'Bronze', 1086, 1448], ['Statue-1', 4, 'Bronze', 848, 1254],
-      ['Statue-3', 6, 'Cast Relief', 1600, 926], ['Statue-4', 7, 'Cast Relief', 1000, 1573],
-      ['Statue-5', 8, 'Cast Relief', 832, 1261], ['Statue-6', 23, 'Cast Relief', 1536, 2048],
-      ['Statue-7', 24, 'Cast Relief', 1284, 1782], ['Statue-8', 25, 'Bronze', 2048, 1536],
-      ['Statue-9', 26, 'Sculpture', 1424, 2048], ['Statue-10', 27, 'Bronze', 720, 960],
-      ['Statue-11', 28, 'Clay', 1500, 2048],
-    ],
-  },
-  painting: {
-    dir: 'Paintings',
-    // painting-1..28 are catalogued №09..№22 and №29..№42
-    items: paintingSizes.map((s, i) => s && [`painting-${i + 1}`, i < 14 ? i + 9 : i + 15, 'Oil on canvas', ...s, paintingDetails[i + 1]]).filter(Boolean),
-  },
-};
-
+// The works live in data/paintings.json and data/sculptures.json, which Nenous edits through Pages CMS.
+// width/height (filled in by tools/prepare-images.cjs) reserve each photo's space so nothing shifts while scrolling.
 const pad = n => String(n).padStart(2, '0');
-const card = (dir, [file, no, medium, w, h, { title, size, year, ...d } = {}]) => `
+const esc = s => String(s).replace(/[&<>"]/g, c => `&#${c.charCodeAt(0)};`); // titles are typed in the CMS
+const card = ({ image, number, title, medium, size, year, width, height }) => `
   <figure class="frame reveal">
-    <img src="Assets/Web/${dir}/${file}.jpg" alt="${title || medium}, № ${pad(no)}" width="${w}" height="${h}" loading="lazy">
-    <figcaption>${title ? `<span class="work-title">${title}</span>` : ''}№ ${pad(no)} · ${[d.medium || medium, size, year].filter(Boolean).join(' · ')}</figcaption>
+    <img src="${esc(image.replace('Assets/Images/', 'Assets/Web/'))}" alt="${esc(title || medium)}, № ${pad(number)}"${width ? ` width="${width}" height="${height}"` : ''} loading="lazy">
+    <figcaption>${title ? `<span class="work-title">${esc(title)}</span>` : ''}№ ${pad(number)} · ${esc([medium, size, year].filter(Boolean).join(' · '))}</figcaption>
   </figure>`;
 
 // Two fixed columns (first half left, as in the original) instead of CSS columns,
 // which re-balance and swap works between columns as lazy images load.
-for (const [name, { dir, items }] of Object.entries(works)) {
-  const half = Math.floor(items.length / 2);
-  document.querySelector(`[data-gallery="${name}"]`).innerHTML = [items.slice(0, half), items.slice(half)]
-    .map(col => `<div class="gallery-col">${col.map(item => card(dir, item)).join('')}</div>`).join('');
+for (const [name, file] of [['sculpture', 'sculptures'], ['painting', 'paintings']]) {
+  try {
+    const items = await fetch(`data/${file}.json`, { cache: 'no-cache' }).then(r => r.json());
+    const half = Math.floor(items.length / 2);
+    document.querySelector(`[data-gallery="${name}"]`).innerHTML = [items.slice(0, half), items.slice(half)]
+      .map(col => `<div class="gallery-col">${col.map(card).join('')}</div>`).join('');
+  } catch (err) {
+    console.error(`Could not load data/${file}.json`, err); // the rest of the page still works
+  }
 }
 
 // Fade sections in as they scroll into view

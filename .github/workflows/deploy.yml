@@ -1,0 +1,52 @@
+# Publishes the site to GitHub Pages on every change, including Nenous's saves in Pages CMS.
+# Needs Settings → Pages → Source set to "GitHub Actions".
+name: Publish site
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write # to save the new web copies back to the project
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+
+      - name: Make web copies of new photos
+        run: |
+          npm install --prefix "$RUNNER_TEMP/tools" --no-save --no-package-lock sharp@0.34.3
+          NODE_PATH="$RUNNER_TEMP/tools/node_modules" node tools/prepare-images.cjs
+
+      - name: Save them to the project
+        run: |
+          git add Assets/Web data
+          if ! git diff --cached --quiet; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit -m "Make web copies of new photos"
+            git pull --rebase
+            git push
+          fi
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: .
+      - id: deployment
+        uses: actions/deploy-pages@v4

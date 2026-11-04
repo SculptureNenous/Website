@@ -1,0 +1,104 @@
+# Pages CMS (app.pagescms.org): the editing page Nenous uses to add and change works.
+# Each list below is one gallery; works show in list order, first half in the left column.
+# After every save, .github/workflows/deploy.yml makes the web copy of any new photo and republishes the site.
+
+media:
+  - name: paintings
+    label: Painting photos
+    input: Assets/Images/Paintings
+    output: Assets/Images/Paintings
+    rename: safe
+    extensions: [jpg, jpeg, png, webp]
+  - name: sculptures
+    label: Sculpture photos
+    input: Assets/Images/Statues
+    output: Assets/Images/Statues
+    rename: safe
+    extensions: [jpg, jpeg, png, webp]
+
+content:
+  - name: paintings
+    label: Paintings
+    type: file
+    path: data/paintings.json
+    format: json
+    list: true
+    fields:
+      - name: image
+        label: Photo
+        type: image
+        required: true
+        options:
+          media: paintings
+      - name: number
+        label: Catalogue number
+        type: number
+        required: true
+        description: Shown as № on the site. Use the next unused number.
+        options:
+          min: 1
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: medium
+        label: Medium
+        type: select
+        required: true
+        options:
+          values: [Oil on canvas, Acrylic]
+      - name: size
+        label: Dimensions
+        type: string
+        description: For example 100 × 80 cm
+      - name: year
+        label: Year
+        type: number
+        options:
+          min: 1990
+          max: 2100
+      # Filled in automatically from the photo; keeps the gallery from jumping while photos load
+      - { name: width, type: number, hidden: true }
+      - { name: height, type: number, hidden: true }
+
+  - name: sculptures
+    label: Sculptures
+    type: file
+    path: data/sculptures.json
+    format: json
+    list: true
+    fields:
+      - name: image
+        label: Photo
+        type: image
+        required: true
+        options:
+          media: sculptures
+      - name: number
+        label: Catalogue number
+        type: number
+        required: true
+        description: Shown as № on the site. Use the next unused number.
+        options:
+          min: 1
+      - name: title
+        label: Title
+        type: string
+      - name: medium
+        label: Medium
+        type: select
+        required: true
+        options:
+          values: [Bronze, Cast Relief, Clay, Sculpture]
+      - name: size
+        label: Dimensions
+        type: string
+        description: For example 40 × 30 cm
+      - name: year
+        label: Year
+        type: number
+        options:
+          min: 1990
+          max: 2100
+      - { name: width, type: number, hidden: true }
+      - { name: height, type: number, hidden: true }
