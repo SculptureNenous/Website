@@ -75,14 +75,5 @@
     "medium": "Clay",
     "width": 800,
     "height": 1092
-  },
-  {
-    "image": "Assets/Images/Statues/statue-12.jpg",
-    "number": 40,
-    "title": "Sculpture",
-    "medium": "Clay",
-    "year": 2015,
-    "width": 800,
-    "height": 1092
   }
 ]
