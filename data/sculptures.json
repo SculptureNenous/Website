@@ -1,77 +1,66 @@
 [
   {
     "image": "Assets/Images/Statues/Statue-2.jpg",
-    "number": 5,
     "medium": "Bronze",
     "width": 800,
     "height": 1067
   },
   {
     "image": "Assets/Images/Statues/Statue-1.jpg",
-    "number": 4,
     "medium": "Bronze",
     "width": 800,
     "height": 1183
   },
   {
     "image": "Assets/Images/Statues/Statue-3.jpg",
-    "number": 6,
     "medium": "Cast Relief",
     "width": 800,
     "height": 463
   },
   {
     "image": "Assets/Images/Statues/Statue-4.jpg",
-    "number": 7,
     "medium": "Cast Relief",
     "width": 800,
     "height": 1258
   },
   {
     "image": "Assets/Images/Statues/Statue-5.jpg",
-    "number": 8,
     "medium": "Cast Relief",
     "width": 800,
     "height": 1212
   },
   {
     "image": "Assets/Images/Statues/Statue-6.jpg",
-    "number": 23,
     "medium": "Cast Relief",
     "width": 800,
     "height": 1067
   },
   {
     "image": "Assets/Images/Statues/Statue-7.jpg",
-    "number": 24,
     "medium": "Cast Relief",
     "width": 800,
     "height": 1110
   },
   {
     "image": "Assets/Images/Statues/Statue-8.jpg",
-    "number": 25,
     "medium": "Bronze",
     "width": 800,
     "height": 600
   },
   {
     "image": "Assets/Images/Statues/Statue-9.jpg",
-    "number": 26,
     "medium": "Sculpture",
     "width": 800,
     "height": 1151
   },
   {
     "image": "Assets/Images/Statues/Statue-10.jpg",
-    "number": 27,
     "medium": "Bronze",
     "width": 720,
     "height": 960
   },
   {
     "image": "Assets/Images/Statues/Statue-11.jpg",
-    "number": 28,
     "medium": "Clay",
     "width": 800,
     "height": 1092

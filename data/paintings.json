@@ -1,7 +1,6 @@
 [
   {
     "image": "Assets/Images/Paintings/painting-1.jpg",
-    "number": 9,
     "title": "New Birth",
     "medium": "Oil on canvas",
     "size": "120.9 × 90.4 cm",
@@ -11,7 +10,6 @@
   },
   {
     "image": "Assets/Images/Paintings/painting-2.jpg",
-    "number": 10,
     "title": "Oil Painting",
     "medium": "Oil on canvas",
     "size": "50 × 60 cm",
@@ -21,7 +19,6 @@
   },
   {
     "image": "Assets/Images/Paintings/painting-3.jpg",
-    "number": 11,
     "title": "Dante's Inferno",
     "medium": "Oil on canvas",
     "size": "120 × 60 cm",
@@ -31,7 +28,6 @@
   },
   {
     "image": "Assets/Images/Paintings/painting-4.jpg",
-    "number": 12,
     "title": "Colorful Moons",
     "medium": "Oil on canvas",
     "size": "100 × 80 cm",
@@ -41,7 +37,6 @@
   },
   {
     "image": "Assets/Images/Paintings/painting-5.jpg",
-    "number": 13,
     "title": "Cultural Heritage",
     "medium": "Oil on canvas",
     "size": "100 × 90 cm",
@@ -51,7 +46,6 @@
   },
   {
     "image": "Assets/Images/Paintings/painting-6.jpg",
-    "number": 14,
     "title": "Behind the Curtain",
     "medium": "Oil on canvas",
     "size": "100 × 80 cm",
@@ -61,7 +55,6 @@
   },
   {
     "image": "Assets/Images/Paintings/painting-7.jpg",
-    "number": 15,
     "title": "Khigga",
     "medium": "Oil on canvas",
     "size": "100 × 80 cm",
@@ -71,7 +64,6 @@
   },
   {
     "image": "Assets/Images/Paintings/painting-8.jpg",
-    "number": 16,
     "title": "Remnants of a Homeland",
     "medium": "Oil on canvas",
     "size": "180 × 150 cm",
@@ -81,7 +73,6 @@
   },
   {
     "image": "Assets/Images/Paintings/painting-9.jpg",
-    "number": 17,
     "title": "Assyrian Moon",
     "medium": "Oil on canvas",
     "size": "100 × 80 cm",
@@ -91,7 +82,6 @@
   },
   {
     "image": "Assets/Images/Paintings/painting-10.jpg",
-    "number": 18,
     "title": "Will of the People",
     "medium": "Acrylic",
     "size": "100 × 120 cm",
@@ -101,7 +91,6 @@
   },
   {
     "image": "Assets/Images/Paintings/painting-11.jpg",
-    "number": 19,
     "title": "Bakhdida Wedding",
     "medium": "Oil on canvas",
     "size": "180 × 150 cm",
@@ -111,7 +100,6 @@
   },
   {
     "image": "Assets/Images/Paintings/painting-12.jpg",
-    "number": 20,
     "title": "Tree of Life",
     "medium": "Oil on canvas",
     "size": "100 × 80 cm",
@@ -121,7 +109,6 @@
   },
   {
     "image": "Assets/Images/Paintings/painting-14.jpg",
-    "number": 22,
     "title": "Oil Painting",
     "medium": "Oil on canvas",
     "size": "100 × 80 cm",
@@ -131,7 +118,6 @@
   },
   {
     "image": "Assets/Images/Paintings/painting-15.jpg",
-    "number": 29,
     "title": "Migratory Bird",
     "medium": "Oil on canvas",
     "size": "70 × 50 cm",
@@ -141,7 +127,6 @@
   },
   {
     "image": "Assets/Images/Paintings/painting-16.jpg",
-    "number": 30,
     "title": "The Compass",
     "medium": "Oil on canvas",
     "size": "100 × 80 cm",
@@ -151,7 +136,6 @@
   },
   {
     "image": "Assets/Images/Paintings/painting-17.jpg",
-    "number": 31,
     "title": "When the Soul Embraces the Sun",
     "medium": "Oil on canvas",
     "size": "80 × 60 cm",
@@ -161,7 +145,6 @@
   },
   {
     "image": "Assets/Images/Paintings/painting-18.jpg",
-    "number": 32,
     "title": "Oil Painting",
     "medium": "Oil on canvas",
     "size": "80 × 100 cm",
@@ -171,7 +154,6 @@
   },
   {
     "image": "Assets/Images/Paintings/painting-19.jpg",
-    "number": 33,
     "title": "War and Hope",
     "medium": "Oil on canvas",
     "size": "100 × 90 cm",
@@ -181,7 +163,6 @@
   },
   {
     "image": "Assets/Images/Paintings/painting-20.jpg",
-    "number": 34,
     "title": "Captives",
     "medium": "Oil on canvas",
     "size": "100 × 90 cm",
@@ -191,7 +172,6 @@
   },
   {
     "image": "Assets/Images/Paintings/painting-21.jpg",
-    "number": 35,
     "title": "Vegetable Seller",
     "medium": "Oil on canvas",
     "size": "100 × 80 cm",
@@ -201,7 +181,6 @@
   },
   {
     "image": "Assets/Images/Paintings/painting-22.jpg",
-    "number": 36,
     "title": "The Martyr in the War",
     "medium": "Oil on canvas",
     "size": "90 × 60 cm",
@@ -211,7 +190,6 @@
   },
   {
     "image": "Assets/Images/Paintings/painting-23.jpg",
-    "number": 37,
     "title": "Take Root",
     "medium": "Oil on canvas",
     "size": "100 × 80 cm",
@@ -221,7 +199,6 @@
   },
   {
     "image": "Assets/Images/Paintings/painting-24.jpg",
-    "number": 38,
     "title": "Waiting",
     "medium": "Oil on canvas",
     "size": "100 × 80 cm",
@@ -231,7 +208,6 @@
   },
   {
     "image": "Assets/Images/Paintings/painting-25.jpg",
-    "number": 39,
     "title": "Old House",
     "medium": "Oil on canvas",
     "size": "100 × 80 cm",
@@ -241,7 +217,6 @@
   },
   {
     "image": "Assets/Images/Paintings/painting-26.jpg",
-    "number": 40,
     "title": "Oil Painting",
     "medium": "Oil on canvas",
     "size": "80 × 100 cm",
@@ -251,7 +226,6 @@
   },
   {
     "image": "Assets/Images/Paintings/painting-27.jpg",
-    "number": 41,
     "title": "Candle",
     "medium": "Oil on canvas",
     "size": "100 × 80 cm",
@@ -261,7 +235,6 @@
   },
   {
     "image": "Assets/Images/Paintings/painting-28.jpg",
-    "number": 42,
     "title": "The Burial of Hope",
     "medium": "Oil on canvas",
     "size": "100 × 80 cm",

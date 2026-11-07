@@ -1,11 +1,10 @@
 // The works live in data/paintings.json and data/sculptures.json, which Nenous edits through Pages CMS.
 // width/height (filled in by tools/prepare-images.cjs) reserve each photo's space so nothing shifts while scrolling.
-const pad = n => String(n).padStart(2, '0');
 const esc = s => String(s).replace(/[&<>"]/g, c => `&#${c.charCodeAt(0)};`); // titles are typed in the CMS
-const card = ({ image, number, title, medium, size, year, width, height }) => `
+const card = ({ image, title, medium, size, year, width, height }) => `
   <figure class="frame reveal">
-    <img src="${esc(image.replace('Assets/Images/', 'Assets/Web/'))}" alt="${esc(title || medium)}, № ${pad(number)}"${width ? ` width="${width}" height="${height}"` : ''} loading="lazy">
-    <figcaption>${title ? `<span class="work-title">${esc(title)}</span>` : ''}№ ${pad(number)} · ${esc([medium, size, year].filter(Boolean).join(' · '))}</figcaption>
+    <img src="${esc(image.replace('Assets/Images/', 'Assets/Web/'))}" alt="${esc(title || medium)}"${width ? ` width="${width}" height="${height}"` : ''} loading="lazy">
+    <figcaption>${title ? `<span class="work-title">${esc(title)}</span>` : ''}${esc([medium, size, year].filter(Boolean).join(' · '))}</figcaption>
   </figure>`;
 
 // Two fixed columns (first half left, as in the original) instead of CSS columns,

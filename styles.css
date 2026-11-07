@@ -167,10 +167,9 @@ a { color: inherit; text-decoration: none; }
 .route { margin-bottom: 31.2px; }
 .ledger-grid { display: grid; grid-template-columns: 1fr 396px; gap: 45.6px; align-items: center; }
 .ledger-list { list-style: none; margin: 0; padding: 0; }
-.ledger-list li { display: grid; grid-template-columns: 80.4px 1fr; padding: 19.2px 0 21.6px; border-bottom: 1px solid var(--rule); }
+.ledger-list li { padding: 19.2px 0 21.6px; border-bottom: 1px solid var(--rule); }
 .ledger-list li:first-child { padding-top: 0; }
 .ledger-list li:last-child { border-bottom: 0; }
-.ledger-no { font: 18px var(--serif); color: var(--terracotta); }
 .ledger-list h3 { font: 400 19.2px var(--serif); margin: 0 0 10.8px; letter-spacing: 0.02em; }
 .ledger-list p { font: 400 14.4px/1.6 var(--sans); color: #4f463e; margin: 0; }
 .ledger-list .meta { font: 500 10.8px var(--sans); letter-spacing: 0.25em; text-transform: uppercase; color: var(--muted); margin-top: 9.6px; }

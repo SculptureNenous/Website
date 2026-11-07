@@ -30,13 +30,6 @@ content:
         required: true
         options:
           media: paintings
-      - name: number
-        label: Catalogue number
-        type: number
-        required: true
-        description: Shown as № on the site. Use the next unused number.
-        options:
-          min: 1
       - name: title
         label: Title
         type: string
@@ -74,13 +67,6 @@ content:
         required: true
         options:
           media: sculptures
-      - name: number
-        label: Catalogue number
-        type: number
-        required: true
-        description: Shown as № on the site. Use the next unused number.
-        options:
-          min: 1
       - name: title
         label: Title
         type: string
