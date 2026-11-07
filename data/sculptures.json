@@ -81,6 +81,8 @@
     "number": 40,
     "title": "Sculpture",
     "medium": "Clay",
-    "year": 2015
+    "year": 2015,
+    "width": 800,
+    "height": 1092
   }
 ]
